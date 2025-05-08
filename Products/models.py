@@ -66,7 +66,7 @@ class Products(CreatedUpdatedOnMixin, RequestResponseMixin):
     description = models.CharField(max_length=225)
     category = models.CharField(max_length=225)
     Price = models.DecimalField(max_digits=10, decimal_places=2)
-    images = models.ImageField(upload_to='products/', blank=True, null=True)
+    image = models.FileField(upload_to='products/')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
 

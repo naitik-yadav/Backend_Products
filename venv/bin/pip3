@@ -1,4 +1,4 @@
-#!/home/naitik/Documents/Col/Backend_Products/venv/bin/python3
+#!/Users/naitikyadav/Documents/Git/Backend_Products/venv/bin/python3.13
 # -*- coding: utf-8 -*-
 import re
 import sys

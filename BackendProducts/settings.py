@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 from datetime import timedelta
 from corsheaders.defaults import default_headers
-
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-d67(owe=jj#co77e1$_b+2%&7(1)#ucf-cd-exh#gay=pa!$-#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".vercel.app", "127.0.0.1", ".now.sh"]
 
 # Application definition
 
@@ -110,15 +110,19 @@ WSGI_APPLICATION = 'BackendProducts.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'products',
+#        'USER': 'postgres',
+#        'PASSWORD': 'postgres',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    }
+# }
+
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'products',
-       'USER': 'postgres',
-       'PASSWORD': 'postgres',
-       'HOST': 'localhost',
-       'PORT': '5432',
-   }
+    'default': dj_database_url.parse("postgresql://gym_owner:npg_x9jCWKp0AQNk@ep-white-block-a4y8es51-pooler.us-east-1.aws.neon.tech/gym?sslmode=require")
 }
 
 
@@ -180,48 +184,33 @@ CORS_ALLOW_CREDENTIALS = True
 TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
 # for logging error
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/django_debug.log'),
-            'when': 'd',
-            'interval': 1,
-            'backupCount': 1,
-            'formatter': 'verbose',
-            'encoding': 'utf-8',
-        }
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.handlers.TimedRotatingFileHandler',
+#             'filename': os.path.join(BASE_DIR, 'logs/django_debug.log'),
+#             'when': 'd',
+#             'interval': 1,
+#             'backupCount': 1,
+#             'formatter': 'verbose',
+#             'encoding': 'utf-8',
+#         }
+#     },
+# }
 
-STATIC_ROOT = os.path.join(BASE_DIR / "static_root")
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
-if not os.path.exists(os.path.join(BASE_DIR, "static")):
-    os.mkdir(os.path.join(BASE_DIR, "static"))
-
-# Create media directory if media directory doesn't exist
-if not os.path.exists(os.path.join(BASE_DIR, "media")):
-    os.mkdir(os.path.join(BASE_DIR, "media"))
-
-# Create static_root directory if static_root directory doesn't exist
-if not os.path.exists(os.path.join(BASE_DIR, "static_root")):
-    os.mkdir(os.path.join(BASE_DIR, "static_root"))
-
-# Create media_root directory if media_root directory doesn't exist
-if not os.path.exists(os.path.join(BASE_DIR, "media_root")):
-    os.mkdir(os.path.join(BASE_DIR, "media_root"))
-
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 CORS_ALLOW_HEADERS = (
     *default_headers,

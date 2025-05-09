@@ -5,6 +5,7 @@ from django.utils import timezone
 from utils.base_models import CreatedUpdatedOnMixin, RequestResponseMixin
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from cloudinary.models import CloudinaryField
 
 
 def validate_file_extension(value):
@@ -74,7 +75,7 @@ class Products(CreatedUpdatedOnMixin, RequestResponseMixin):
     description = models.CharField(max_length=225)
     category = models.CharField(max_length=225)
     Price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.FileField(upload_to='products/', blank=True, null=True,validators=[validate_file_extension])
+    image = CloudinaryField(upload_to='products/', blank=True, null=True,validators=[validate_file_extension])
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
 

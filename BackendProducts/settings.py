@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'Products',
     'utils',
+    'cloudinary', 
+    'cloudinary_storage'
 ]
 
 AUTH_USER_MODEL = "Products.CustomUser"
@@ -64,6 +66,14 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=365),  # 1 year
     'REFRESH_TOKEN_LIFETIME': timedelta(days=365),
 }
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dxkoya5bk',
+    'API_KEY': '683388297853462',
+    'API_SECRET': 'QNpP4UaNw1PSjJPc-gYSRi8mOW4',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # CHANNEL_LAYERS = {

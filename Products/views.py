@@ -7,7 +7,6 @@ from rest_framework import status, permissions
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from django.shortcuts import get_object_or_404
-import cloudinary
 
 class RegisterView(BaseGenericAPIView):
     serializer_class = RegisterSerializer
@@ -119,9 +118,6 @@ class ProductView(BaseGenericAPIView):
 
     def get(self, request):
         products = Products.objects.all()
-        for product in products:
-            if product.image:
-                product.image = cloudinary.CloudinaryImage(product.image).build_url()
         serializer = self.get_serializer(products, many=True)
         return Response(serializer.data)
 

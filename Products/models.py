@@ -75,7 +75,7 @@ class Products(CreatedUpdatedOnMixin, RequestResponseMixin):
     description = models.CharField(max_length=225)
     category = models.CharField(max_length=225)
     Price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = CloudinaryField(upload_to='products/', blank=True, null=True,validators=[validate_file_extension])
+    image = CloudinaryField('image', blank=True, null=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
 

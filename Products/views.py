@@ -118,6 +118,9 @@ class ProductView(BaseGenericAPIView):
 
     def get(self, request):
         products = Products.objects.all()
+        for product in products:
+            if product.image:
+                product.image = cloudinary.CloudinaryImage(product.image).build_url()
         serializer = self.get_serializer(products, many=True)
         return Response(serializer.data)
 

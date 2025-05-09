@@ -16,6 +16,9 @@ from datetime import timedelta
 from corsheaders.defaults import default_headers
 import dj_database_url
 from whitenoise import WhiteNoise
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -47,6 +50,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'Products',
     'utils',
+    'cloudinary', 
+    'cloudinary_storage'
 ]
 
 AUTH_USER_MODEL = "Products.CustomUser"
@@ -64,6 +69,13 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=365),  # 1 year
     'REFRESH_TOKEN_LIFETIME': timedelta(days=365),
 }
+
+cloudinary.config(
+    cloud_name='dxkoya5bk',
+    api_key='683388297853462',
+    api_secret='QNpP4UaNw1PSjJPc-gYSRi8mOW4'
+)
+
 
 
 # CHANNEL_LAYERS = {

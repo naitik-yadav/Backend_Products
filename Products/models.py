@@ -3,7 +3,15 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from utils.base_models import CreatedUpdatedOnMixin, RequestResponseMixin
-  
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+
+
+def validate_file_extension(value):
+    valid_extensions = ['jpg', 'jpeg', 'png', 'svg', 'pdf']
+    ext = value.name.split('.')[-1].lower()  # Get the file extension and convert it to lowercase
+    if ext not in valid_extensions:
+        raise ValidationError(_('Invalid file extension. Allowed extensions are: jpg, jpeg, png, svg, pdf.'))
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -66,7 +74,7 @@ class Products(CreatedUpdatedOnMixin, RequestResponseMixin):
     description = models.CharField(max_length=225)
     category = models.CharField(max_length=225)
     Price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.FileField(upload_to='products/')
+    image = models.FileField(upload_to='products/', blank=True, null=True,validators=[validate_file_extension])
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
 

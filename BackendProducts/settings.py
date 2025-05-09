@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-d67(owe=jj#co77e1$_b+2%&7(1)#ucf-cd-exh#gay=pa!$-#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".vercel.app", "127.0.0.1", ".now.sh"]
+ALLOWED_HOSTS = [".vercel.app", "127.0.0.1", ".now.sh", "localhost"]
 
 # Application definition
 
@@ -112,20 +112,20 @@ WSGI_APPLICATION = 'BackendProducts.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'products',
-       'USER': 'postgres',
-       'PASSWORD': 'postgres',
-       'HOST': 'localhost',
-       'PORT': '5432',
-   }
-}
-
 # DATABASES = {
-#     'default': dj_database_url.parse("postgresql://gym_owner:npg_x9jCWKp0AQNk@ep-white-block-a4y8es51-pooler.us-east-1.aws.neon.tech/gym?sslmode=require")
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'products',
+#        'USER': 'postgres',
+#        'PASSWORD': 'postgres',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    }
 # }
+
+DATABASES = {
+    'default': dj_database_url.parse("postgresql://gym_owner:npg_x9jCWKp0AQNk@ep-white-block-a4y8es51-pooler.us-east-1.aws.neon.tech/gym?sslmode=require")
+}
 
 
 # Password validation

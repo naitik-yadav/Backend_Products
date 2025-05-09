@@ -226,11 +226,16 @@ class OrderAPI(BaseGenericAPIView):
     def post(self, request):
         cart = Cart.objects.get(user=request.user)
         order = Order.objects.create(user=request.user, cart=cart)
-        for cart_item in cart.cartitem_set.all():
-            OrderItem.objects.create(order=order, product=cart_item.product, quantity=cart_item.quantity)
+        for cart_item in cart.items.all():
+            OrderItem.objects.create(
+                order=order,
+                product=cart_item.product,
+                quantity=cart_item.quantity
+            )
             cart_item.delete()
         serializer = OrderItemListSerializer(order)
         return Response(serializer.data)
+
 
 class OrderDetailAPI(BaseGenericAPIView):
 
